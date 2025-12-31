@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year My Love</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #a18cd1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 2rem;
+            text-align: center;
+            max-width: 90%;
+            width: 400px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1, h2, .fancy-font { font-family: 'Dancing Script', cursive; }
+
+        .btn-primary {
+            background: #fff;
+            color: #ff6b6b;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn-primary:disabled {
+            background: #e0e0e0;
+            color: #999;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .page { display: none; opacity: 0; transition: opacity 0.5s ease-in-out; }
+        .page.active { display: block; opacity: 1; animation: fadeIn 0.8s ease-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .heart { position: absolute; color: rgba(255, 255, 255, 0.6); animation: float 6s linear infinite; z-index: 1; pointer-events: none; }
+        @keyframes float {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .particle { position: absolute; border-radius: 50%; pointer-events: none; z-index: 5; }
+        
+        .photo-frame {
+            width: 120px;
+            height: 120px;
+            background: white;
+            padding: 5px;
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        #timer-display {
+            font-family: monospace;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 15px 0;
+            color: white;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="hearts-container"></div>
+
+    <div class="glass-card" id="main-card">
+        
+        <div id="page-1" class="page active">
+            <h1 class="text-4xl text-white mb-4 font-bold"> Oye My Love! ❤️</h1>
+            <p class="text-white text-lg">Waiting...? </p>
+            <div id="timer-display" class="text-2xl font-bold">00:00</div>
+            <p id="timer-subtext" class="text-white opacity-90 text-sm mb-4"> Yes I know 😘</p>
+            <button id="open-btn" class="btn-primary" onclick="nextPage(2)" disabled>Locked 🔒</button>
+        </div>
+
+        <div id="page-2" class="page">
+            <h2 class="text-3xl text-white mb-6">Ready love ?</h2>
+            <div class="photo-frame">
+                <i class="fas fa-calendar-alt text-4xl text-pink-400"></i>
+            </div>
+            <p class="text-white mb-6">Let's count it down together...</p>
+            <button class="btn-primary" onclick="startCountdown()">Start Countdown</button>
+        </div>
+
+        <div id="page-3" class="page">
+            <div id="countdown-display" class="text-7xl font-bold text-white">3</div>
+            <p class="text-white mt-4 text-xl">Ma v gin reha...</p>
+        </div>
+
+        <div id="page-4" class="page">
+            <h1 class="text-5xl text-white font-bold mb-4 fancy-font">Happy New Year Putt❤️!</h1>
+            <div class="text-6xl mb-4">🎆</div>
+            <p class="text-white text-lg font-bold">2026</p>
+            <button class="btn-primary" onclick="nextPage(5)"> Note <i class="fas fa-envelope ml-2"></i></button>
+        </div>
+
+        <div id="page-5" class="page">
+            <div class="bg-white/90 p-4 rounded-lg min-h-[150px] flex items-center">
+                <p id="typing-text" class="text-gray-700 italic text-sm"></p>
+            </div>
+            <button class="btn-primary mt-4" onclick="nextPage(6)">One Last </button>
+        </div>
+
+        <div id="page-6" class="page">
+            <h2 class="text-3xl text-white mb-8 fancy-font">My Heart is always Yours</h2>
+            <div style="cursor: pointer;" onclick="burstConfetti(event)">
+                <i class="fas fa-heart text-6xl text-red-500 animate-pulse"></i>
+            </div>
+            <p class="text-white mt-8 text-sm opacity-80">Tap the heart!</p>
+            <button class="btn-primary mt-8" onclick="restart()">Dubara? <i class="fas fa-redo ml-2"></i></button>
+        </div>
+
+    </div>
+
+    <script>
+       const targetDate = new Date("January 1, 2026 00:00:00").getTime();
+        const noteText = "ਸਾਲ ਧਾ ਕੀ ha ਸੱਜਣਾ , ਜਧ ਸਾਹ hi ਤੇਰੇ nawe ha , ਨਾ ਮੈ ਦਿਨ ginne ha nh ਸਾਲ Jd ਉਮਰ hi a ਨਾਮ tere , Eh v ਸਾਲ ਅਗਲਾ v jihne tk ਸਾਹ ne hr ਪਲੱ tere nal ne ...,    I love you ❤️ Happy New year mere bache❤️";
+
+               // Timer Logic
+        const timerInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            // Calculations for hours, minutes and seconds
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (distance > 0) {
+                document.getElementById("timer-display").innerHTML = 
+                    (hours < 10 ? "0"+hours : hours) + ":" + 
+                    (minutes < 10 ? "0"+minutes : minutes) + ":" + 
+                    (seconds < 10 ? "0"+seconds : seconds);
+            } else {
+                clearInterval(timerInterval);
+                document.getElementById("timer-display").innerHTML = "Happy New Year My Love ❤️";
+                const btn = document.getElementById("open-btn");
+                btn.disabled = false;
+                btn.innerHTML = "Open";
+                btn.classList.add("animate-bounce");
+            }
+        }, 1000);
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(`page-${pageId}`).classList.add('active');
+        }
+
+        function nextPage(num) {
+            showPage(num);
+            if (num === 4) startFireworks();
+            if (num === 5) typeWriterEffect();
+        }
+
+        function restart() {
+            showPage(1);
+            document.getElementById('typing-text').textContent = "";
+        }
+
+        function startCountdown() {
+            nextPage(3);
+            let count = 3;
+            const display = document.getElementById('countdown-display');
+            const timer = setInterval(() => {
+                count--;
+                if (count > 0) display.textContent = count;
+                else { clearInterval(timer); nextPage(4); }
+            }, 1000);
+        }
+
+        function typeWriterEffect() {
+            const element = document.getElementById('typing-text');
+            element.textContent = "";
+            let i = 0;
+            function type() {
+                if (i < noteText.length) {
+                    element.textContent += noteText.charAt(i);
+                    i++;
+                    setTimeout(type, 50);
+                }
+            }
+            type();
+        }
+
+        // Animation Functions
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '<i class="fas fa-heart"></i>';
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+            document.getElementById('hearts-container').appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 500);
+
+        function createBurst(x, y) {
+            const colors = ['#ff0', '#f0f', '#0ff', '#fff', '#f00'];
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                document.body.appendChild(particle);
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.width = '6px';
+                particle.style.height = '6px';
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 100 + 50;
+                particle.animate([
+                    { transform: 'translate(0, 0)', opacity: 1 },
+                    { transform: `translate(${Math.cos(angle)*velocity}px, ${Math.sin(angle)*velocity}px)`, opacity: 0 }
+                ], { duration: 1000, easing: 'ease-out' }).onfinish = () => particle.remove();
+            }
+        }
+
+        function startFireworks() {
+            for(let i=0; i<8; i++) {
+                setTimeout(() => createBurst(Math.random()*window.innerWidth, Math.random()*window.innerHeight/2), i*400);
+            }
+        }
+
+        function burstConfetti(e) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = rect.left + rect.width/2;
+            const y = rect.top + rect.height/2;
+            createBurst(x, y);
+
+            const msg = document.createElement('div');
+            msg.innerText = "I Love You!";
+            msg.style.position = 'absolute';
+            msg.style.left = x + 'px';
+            msg.style.top = (y - 50) + 'px';
+            msg.style.color = '#fff';
+            msg.style.fontWeight = 'bold';
+            msg.style.fontSize = '1.5rem';
+            msg.style.transform = 'translate(-50%, -50%)';
+            msg.style.textShadow = '0 0 10px red';
+            msg.style.zIndex = '100';
+            document.body.appendChild(msg);
+
+            msg.animate([
+                { transform: 'translate(-50%, -50%) scale(0.5)', opacity: 0 },
+                { transform: 'translate(-50%, -150%) scale(1.5)', opacity: 1 },
+                { transform: 'translate(-50%, -200%) scale(1)', opacity: 0 }
+            ], { duration: 1500 }).onfinish = () => msg.remove();
+        }
+    </script>
+</body>
+</html>
